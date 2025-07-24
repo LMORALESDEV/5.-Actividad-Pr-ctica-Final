@@ -1,0 +1,23 @@
+﻿@model PaisViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Crear País";
+}
+
+<h2>Crear País</h2>
+
+<form asp-action="Crear" method="post">
+    <div>
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mt-2">
+        <button class="btn btn-success" type="submit">Crear</button>
+        <a class="btn btn-secondary" asp-action="lista">Cancelar</a>
+    </div>
+
+</form>
