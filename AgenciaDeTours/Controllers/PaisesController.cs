@@ -1,10 +1,12 @@
 ﻿using AgenciaDeTours.Datos;
 using AgenciaDeTours.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace AgenciaDeTours.Controllers
 {
-    public class PaisesController : Controller
+    public class PaisesController: Controller
     {
         private readonly AgenciaDeToursDbContext context;
 
@@ -18,7 +20,7 @@ namespace AgenciaDeTours.Controllers
             var paises = context.Paises.ToList();
 
             return View(paises);
-
+        
         }
 
         public IActionResult Crear()
@@ -72,6 +74,24 @@ namespace AgenciaDeTours.Controllers
             }
 
             return RedirectToAction("Lista");
+        }
+
+        public async Task<IActionResult> ExportarCsv()
+        {
+            var paises = await context.Paises.ToListAsync();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("Id,Nombre");
+
+            foreach (var r in paises)
+            {
+                sb.AppendLine($"{r.Id},{r.Nombre}");
+            }
+
+            var bytes = Encoding.UTF8.GetPreamble()
+                      .Concat(Encoding.UTF8.GetBytes(sb.ToString()))
+                      .ToArray();
+            return File(bytes, "text/csv", "paises.csv");
         }
     }
 }
