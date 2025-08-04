@@ -4,6 +4,7 @@ using AgenciaDeTours.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgenciaDeTours.Migrations
 {
     [DbContext(typeof(AgenciaDeToursDbContext))]
-    partial class AgenciaDeToursDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250731185808_ColumnaEstadoEsCalculada")]
+    partial class ColumnaEstadoEsCalculada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
