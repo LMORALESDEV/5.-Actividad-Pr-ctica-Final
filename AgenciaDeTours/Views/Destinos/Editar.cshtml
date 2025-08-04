@@ -1,0 +1,41 @@
+﻿@model DestinoViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Editar Destino";
+}
+
+<h2>Editar Destino</h2>
+
+<form asp-action="Editar" method="post">
+    <div>
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="PaisId"></label>
+        <select asp-for="PaisId" asp-items="Model.PaisesOpciones" class="form-select"></select>
+        <span asp-validation-for="PaisId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="DuracionDias"></label>
+        <input asp-for="DuracionDias" class="form-control" />
+        <span asp-validation-for="DuracionDias" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="DuracionHoras"></label>
+        <input asp-for="DuracionHoras" class="form-control" />
+        <span asp-validation-for="DuracionHoras" class="text-danger"></span>
+    </div>
+
+    <div class="mt-2">
+        <button class="btn btn-success" type="submit">Editar</button>
+        <a class="btn btn-secondary" asp-action="lista">Cancelar</a>
+    </div>
+
+</form>

@@ -1,0 +1,74 @@
+﻿@model TourViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Crear Tour";
+}
+
+<h2>Crear Tour</h2>
+
+<form asp-action="Crear" method="post">
+    <div>
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="PaisId"></label>
+        <select asp-for="PaisId" asp-items="Model.PaisesOpciones" class="form-select"></select>
+        <span asp-validation-for="PaisId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="DestinoId"></label>
+       
+        <select id="DestinoId" name="DestinoId" class="form-select">
+            @foreach (var destino in Model.DestinosOpciones)
+            {
+                <!option value="@destino.Value" @((Model.DestinoId.ToString() == destino.Value) ? "selected" : "") >
+                @destino.Text
+                </!option>
+            }
+        </select>
+        
+        <span asp-validation-for="DestinoId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Fecha"></label>
+        <input asp-for="Fecha" class="form-control" />
+        <span asp-validation-for="Fecha" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Precio"></label>
+        <input asp-for="Precio" class="form-control" />
+        <span asp-validation-for="Precio" class="text-danger"></span>
+    </div>
+
+    <div class="mt-2">
+        <button class="btn btn-success" type="submit">Crear</button>
+        <a class="btn btn-secondary" asp-action="lista">Cancelar</a>
+    </div>
+
+</form>
+
+<script>
+    document.getElementById("PaisId").addEventListener("change", function () {
+      const paisId = this.value;
+      fetch(`/destinos/porpais/${paisId}`)
+        .then(res => res.json())
+        .then(data => {
+          const destinoSelect = document.getElementById("DestinoId");
+          destinoSelect.innerHTML = "";
+          data.forEach(destino => {
+            const opt = document.createElement("option");
+            opt.value = destino.id;
+            opt.text = destino.nombre;
+            destinoSelect.appendChild(opt);
+          });
+        });
+    });
+</script>

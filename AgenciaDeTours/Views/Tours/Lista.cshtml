@@ -1,16 +1,16 @@
-﻿@model IEnumerable<PaisViewModel>
+﻿@model IEnumerable<TourViewModel>
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewBag.Title = "Lista de Países";
+    ViewBag.Title = "Lista de Tours";
 
 }
 
-<h2>Países</h2>
+<h2>Tours</h2>
 
-<a class="btn btn-primary mb-4" asp-action="crear">Registrar país</a>
+<a class="btn btn-primary mb-4" asp-action="crear">Registrar tour</a>
 
 <a asp-action="ExportarCsv" class="btn btn-primary mb-4">
     Exportar a CSV
@@ -21,7 +21,9 @@
     <table class="table table-striped" border="1">
         <thead>
             <tr>
-                <th>País</th>
+                <th>Tour</th>
+                <th>Destino</th>
+                <th>Pais</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -31,6 +33,8 @@
             {
                 <tr>
                     <td>@item.Nombre</td>
+                    <td>@item.Destino.Nombre</td>
+                    <td>@item.Destino.Pais.Nombre</td>
                     <td>
                         @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
                         @Html.ActionLink("Eliminar", "Eliminar", new { id = item.Id })
@@ -43,6 +47,6 @@
 }
 else
 {
-    <p>No hay países registrados</p>
+    <p>No hay tours registrados</p>
 }
 
